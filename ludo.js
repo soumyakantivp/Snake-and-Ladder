@@ -56,7 +56,7 @@ function move(ctx,player,sq,n,pts){
     var initialY = player.y;
     var newX,newY;
     
-    //console.log(player.x,player.y,dir);
+    console.log(player.x,player.y,dir,pts);
     //remove old position
     ctx.clearRect(player.x-17,player.y-17,34,34);
     
@@ -68,12 +68,22 @@ function move(ctx,player,sq,n,pts){
         ctx.fillStyle = "white"//"rgb(80,150,0)";
     ctx.fillRect(player.x-17,player.y-17,34,34);
     //create new position
-    if(initialX + dir*sq*pts > (sq*n)+(sq/2)){
+    if(initialX + dir*sq*pts < sq+(sq/2) && initialY <= sq+(sq/2)){
+        newX = initialX;
+        newY = initialY; 
+    }
+    else if(initialX + dir*sq*pts > (sq*n)+(sq/2)){
         newY = initialY - sq;
         var xoverflow = (initialX + sq*pts) - (sq*n);
         newX = (sq*n) - xoverflow + 2*sq;
         dir = -1;
-        console.log(xoverflow);
+        //console.log(xoverflow);
+    }
+    else if(initialX + dir*sq*pts < sq+(sq/2)){
+        newY = initialY - sq;
+        var xoverflow = -(initialX - sq*pts) + sq+(sq/2);
+        newX = (sq/2) + xoverflow ;
+        dir = 1;
     }
     else{
         //console.log(player.x,player.y,dir);
@@ -114,7 +124,7 @@ window.addEventListener('load', ()=>{
     const player1 =new player(ctx,sq+sq/2,sq+(n*sq)-(sq/2),1);
     show(ctx,player1);
     document.getElementById("button").addEventListener("click", ()=>{
-        move(ctx,player1,sq,n,1);
+        move(ctx,player1,sq,n,Math.round(Math.random()*6));
     });
     
     //ctx.strokeStyle = "black";
@@ -124,7 +134,7 @@ window.addEventListener('load', ()=>{
 })
 
 window.addEventListener('resize',()=>{
-    console.log(n,sq);
+    //console.log(n,sq);
     const canvas = document.querySelector("#canvas");
     const ctx = canvas.getContext("2d");
     canvas.height  = n * sq + 100;

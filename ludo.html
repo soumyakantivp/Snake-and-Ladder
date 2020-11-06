@@ -8,7 +8,10 @@
 </head>
 <body>
     
-    
+        <img id="l1" src="ladder1.png">
+        <img id="l2" src="ladder2.png">
+        <img id="s1" src="snake1.png">
+        <img id="s2" src="snake2.png">
         <canvas id="canvas"></canvas>
         <button id="button"></button>
     
@@ -23,6 +26,42 @@
         width:auto;
         background-color: rgb(67, 126, 126);
        
+    }
+    #l1{
+        position:absolute;
+        left:50%;
+        top:45%;
+        transform:translate(-225px,-150px);
+        z-index: 1;
+        height: 130px;
+        width:100px;
+    }
+    #l2{
+        position:absolute;
+        left:50%;
+        top:45%;
+        transform:translate(100px,-50px);
+        z-index: 1;
+        height: 200px;
+        width:100px;
+    }
+    #s1{
+        position:absolute;
+        left:50%;
+        top:45%;
+        transform:translate(-210px,80px);
+        z-index: 1;
+        height: 150px;
+        width:190px;
+    }
+    #s2{
+        position:absolute;
+        left:50%;
+        top:45%;
+        transform:translate(-80px,-210px);
+        z-index: 1;
+        height: 200px;
+        width:150px;
     }
     #canvas{
         position:absolute;
