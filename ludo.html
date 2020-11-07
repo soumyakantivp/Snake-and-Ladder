@@ -15,7 +15,10 @@
         <canvas id="canvas"></canvas>
         <button id="dice"></button>
         <button id="button">player1</button>
+        <button id="button2">player2</button>
         <button id="start">START</button>
+        <button id="p1"disabled></button>
+        <button id="p2"disabled></button>
     
 </body>
 <style>
@@ -41,6 +44,11 @@
         background-color: rgb(94, 30, 94);
         border: none;
         box-shadow: 0px 0px 10px 4px black inset;
+        color: rgba(219, 228, 139, 0.938);
+        font-weight: bold;
+        font-size: 16px;
+        font-family: Arial, Helvetica, sans-serif;
+        letter-spacing: 3px;
     }
     #l1{
         position:absolute;
@@ -102,6 +110,36 @@
         transform:translate(-50%,-50%);
         border:2px solid black;
     }
+    #p1{
+        visibility: hidden;
+        font-size: 18px;
+        font-weight: bold;
+        border:5px solid red;
+        position: absolute;
+        height:60px;
+        width:120px;
+        left:50%;
+        bottom:30px;
+        transform:translate(190px,10px);
+        background-color: transparent;
+        z-index: -1;
+        
+    }
+    #p2{
+        visibility: hidden;
+        font-size: 18px;
+        font-weight: bold;
+        border:5px solid green;
+        position: absolute;
+        height:60px;
+        width:120px;
+        left:50%;
+        bottom:30px;
+        transform:translate(-310px,10px);
+        background-color: transparent;
+        z-index: -1;
+        
+    }
     #button{
         visibility: hidden;
         font-size: 18px;
@@ -116,7 +154,24 @@
         background-color: red;
         box-shadow: 0px -2px 10px 2px rgba(0,0,0,0.5) inset;
     }
+    #button2{
+        visibility: hidden;
+        font-size: 18px;
+        font-weight: bold;
+        border:none;
+        position: absolute;
+        height:40px;
+        width:100px;
+        left:50%;
+        bottom:30px;
+        transform:translate(-300px,0px);
+        background-color: green;
+        box-shadow: 0px -2px 10px 2px rgba(0,0,0,0.5) inset;
+    }
     #button:hover{
+        box-shadow: 0px -2px 10px 2px rgba(0,0,0,1) inset;
+    }
+    #button2:hover{
         box-shadow: 0px -2px 10px 2px rgba(0,0,0,1) inset;
     }
     
