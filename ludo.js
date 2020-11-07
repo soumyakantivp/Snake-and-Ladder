@@ -135,6 +135,17 @@ function move(ctx, player, sq, n, pts) {
     ctx.closePath();
     //snakes and ladder logic: 275,475 <- 125,425 , 425,425 -> 425,275,
     // 275,275 <- 275,175, 125,275 -> 125,175
+    //isGameOver?
+    if(player.x == sq + (sq/2) && player.y == sq + (sq/2)){
+        document.getElementById("button").disabled = true;
+        myMusic.stop();
+        myMusic = new sound("winMusic.wav");
+        myMusic.play();
+        setTimeout(function(){
+            window.location.reload();
+        },5950);
+       
+    }
     document.getElementById("button").disabled = true;
     if (newX == 125 && newY == 425 || newX == 275 && newY == 125 || newX == 425 && newY == 425 || newX == 125 && newY == 275) {
         //snake1
@@ -228,7 +239,7 @@ function move(ctx, player, sq, n, pts) {
     }
     setTimeout(function(){
         document.getElementById("button").disabled = false;
-    }, 10); // max allowed click speed of dice casting button!(must be > 800)
+    }, 700); // max allowed click speed of dice casting button!(must be > 800)
     
 }
 window.addEventListener('load', () => {
