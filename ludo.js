@@ -39,8 +39,28 @@ class player {
 
     }
 }
-function show(ctx, player) {
+function sound(src) {
+    this.sound = document.createElement("audio");
+    this.sound.src = src;
+    this.sound.setAttribute("preload", "auto");
+    this.sound.setAttribute("controls", "none");
+    this.sound.style.display = "none";
+    this.sound.loop = true;
+    document.body.appendChild(this.sound);
+    this.play = function(){
+        this.sound.play();
+    }
+    this.stop = function(){
+        this.sound.pause();
+    }    
+}
+var myMusic;
+function start(ctx, player) {
+    blink();
+    myMusic = new sound("coverMusic.mp3");
+    myMusic.play();
     console.log(player.x + " " + player.y);
+    
     ctx.beginPath();
     //ctx.arc(175,425,15,0,2*Math.PI);
     ctx.arc(player.x, player.y, 15, 0, 2 * Math.PI);
@@ -51,9 +71,18 @@ function show(ctx, player) {
     ctx.fill();
     ctx.closePath();
 }
-
+function blink(){
+    console.log(document.getElementById("dice").style.boxShadow);
+    var dice =  document.getElementById("dice");
+    
+    setInterval(function(){
+        dice.style.boxShadow = `0px 0px ${Math.round(Math.random() * 30)}px ${Math.round(Math.random() * 15)}px black`;
+    },200);
+    
+}
 let dir = 1;
 function move(ctx, player, sq, n, pts) {
+   
     var initialX = player.x;
     var initialY = player.y;
     var newX, newY;
@@ -197,6 +226,10 @@ function move(ctx, player, sq, n, pts) {
         }, 600);
         
     }
+    setTimeout(function(){
+        document.getElementById("button").disabled = false;
+    }, 10); // max allowed click speed of dice casting button!(must be > 800)
+    
 }
 window.addEventListener('load', () => {
     const canvas = document.querySelector("#canvas");
@@ -207,13 +240,19 @@ window.addEventListener('load', () => {
     canvas.width = n * sq + 100;
     draw(ctx, sq, n);
     //snake(ctx);
-    const player2 =new player(ctx,175,425,2);
-    //const player1 = new player(ctx, sq + sq / 2, sq + (n * sq) - (sq / 2), 1);
-    show(ctx, player2);
+    //const player2 =new player(ctx,175,425,2);
+    const player1 = new player(ctx, sq + sq / 2, sq + (n * sq) - (sq / 2), 1);
+    
+    document.getElementById("start").addEventListener("click", () => {
+        start(ctx, player1);
+        document.getElementById("start").style.visibility = "hidden";
+        document.getElementById("dice").style.visibility = "visible";
+        document.getElementById("button").style.visibility = "visible";
+    });
     document.getElementById("button").addEventListener("click", () => {
         var diceVal = 1+ Math.round(Math.random()*5);
         document.getElementById("dice").style.backgroundImage = "url("+diceVal+".png)";
-        move(ctx, player2, sq, n, diceVal);
+        move(ctx, player1, sq, n, diceVal);
     });
 
     //ctx.strokeStyle = "black";
