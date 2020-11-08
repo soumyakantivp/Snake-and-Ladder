@@ -120,6 +120,19 @@ function move(ctx, player, player2, sq, n, pts) {
     ctx.fillRect(player.x - 17, player.y - 17, 34, 34);
 
     //create new position/circle of player1****************************************
+    //check if collision has occured!
+    if (player.x == player2.x && player.y == player2.y) {
+        console.log("1=" + player.x, player.y + "  2=" + player2.x, player2.y);
+        ctx.beginPath();
+        ctx.arc(player2.x, player2.y, 15, 0, 2 * Math.PI);
+        ctx.fillStyle = player2.color;
+        ctx.strokeStyle = "black";
+        ctx.lineWidth = 3;
+        ctx.stroke();
+        ctx.fill();
+        ctx.closePath();
+    }
+
     //general player move logic
     if (initialX + player.dir * sq * pts < sq + (sq / 2) && initialY <= sq + (sq / 2)) {
         newX = initialX;
@@ -143,7 +156,7 @@ function move(ctx, player, player2, sq, n, pts) {
         newX = initialX + player.dir * sq * pts;
         newY = initialY;
     }
-    //draw first for visual effect
+    //draw first for visual effect fro snake bites and ladder climbs
 
     ctx.beginPath();
     ctx.arc(newX, newY, 15, 0, 2 * Math.PI);
@@ -155,8 +168,7 @@ function move(ctx, player, player2, sq, n, pts) {
     ctx.closePath();
     //snakes and ladder logic: 275,475 <- 125,425 , 425,425 -> 425,275,
     // 275,275 <- 275,175, 125,275 -> 125,175
-    //is Game Over?
-    end(player, sq);
+    
 
     if ((newX == 125 && newY == 425) || (newX == 275 && newY == 125) || (newX == 425 && newY == 425) || (newX == 125 && newY == 275)) {
         //snake1
@@ -238,8 +250,8 @@ function move(ctx, player, player2, sq, n, pts) {
                 ctx.fillRect(newX - 17, newY - 17, 34, 34);
                 newY = 175;
                 newX = 125;
-            }, 300);
-
+            }, 200);
+            
         }
 
         //draw circle at newX,newY***********************************
@@ -254,22 +266,15 @@ function move(ctx, player, player2, sq, n, pts) {
             ctx.fill();
             ctx.closePath();
         }, 600);
-        //check if collision has occured!
-        if (player.x == player2.x && player.y == player2.y) {
-            console.log("1=" + player.x, player.y + "  2=" + player2.x, player2.y);
-            ctx.beginPath();
-            ctx.arc(player2.x, player2.y, 15, 0, 2 * Math.PI);
-            ctx.fillStyle = player2.color;
-            ctx.strokeStyle = "black";
-            ctx.lineWidth = 3;
-            ctx.stroke();
-            ctx.fill();
-            ctx.closePath();
-        }
-
-    }
-    player.x = newX;
-    player.y = newY;
+        
+    } //snakes and ladder logic: ends
+    setTimeout(function(){
+        player.x = newX;
+        player.y = newY;
+        //is Game Over?
+        end(player, sq);
+    },300);//must be greater than the time out of newX newY update on sankes & ladder logic >200
+    
     console.log("1=" + player.x, player.y, player.n);
 }
 window.addEventListener('load', () => {
@@ -321,7 +326,7 @@ window.addEventListener('load', () => {
     //ctx.strokeRect(100,100,100,100);
     //ctx.fillRect(200,100,100,100);
 
-})
+});
 
 window.addEventListener('resize', () => {
     //console.log(n,sq);
