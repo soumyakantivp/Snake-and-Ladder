@@ -82,6 +82,7 @@ function end(player, sq) {
     //isGameOver?
     if (player.x == sq + (sq / 2) && player.y == sq + (sq / 2)) {
         document.getElementById("button").disabled = true;
+        document.getElementById("p" + player.n + "win").style.visibility = "visible";
         myMusic.stop();
         myMusic = new sound("winMusic.wav");
         myMusic.play();
@@ -112,11 +113,11 @@ function move(ctx, player, player2, sq, n, pts) {
     ctx.clearRect(player.x - 17, player.y - 17, 34, 34);
 
     if ((Math.round((player.y - sq) / sq)) % 2 == 0 && Math.round(((player.x - sq) / sq)) % 2 == 1)
-        ctx.fillStyle = "black";//"rgb(10,70,10)";
+        ctx.fillStyle = "rgb(10,70,10)";
     else if ((Math.round((player.y - sq) / sq)) % 2 == 1 && Math.round(((player.x - sq) / sq)) % 2 == 0)
-        ctx.fillStyle = "black";//"rgb(10,70,10)";
+        ctx.fillStyle = "rgb(10,70,10)";
     else
-        ctx.fillStyle = "white"//"rgb(80,150,0)";
+        ctx.fillStyle = "rgb(80,150,0)";
     ctx.fillRect(player.x - 17, player.y - 17, 34, 34);
 
     //create new position/circle of player1****************************************
@@ -168,7 +169,7 @@ function move(ctx, player, player2, sq, n, pts) {
     ctx.closePath();
     //snakes and ladder logic: 275,475 <- 125,425 , 425,425 -> 425,275,
     // 275,275 <- 275,175, 125,275 -> 125,175
-    
+
 
     if ((newX == 125 && newY == 425) || (newX == 275 && newY == 125) || (newX == 425 && newY == 425) || (newX == 125 && newY == 275)) {
         //snake1
@@ -181,11 +182,11 @@ function move(ctx, player, player2, sq, n, pts) {
                 ctx.clearRect(newX - 17, newY - 17, 34, 34);
 
                 if ((Math.round((newY - sq) / sq)) % 2 == 0 && Math.round(((newX - sq) / sq)) % 2 == 1)
-                    ctx.fillStyle = "black";//"rgb(10,70,10)";
+                    ctx.fillStyle = "rgb(10,70,10)";
                 else if ((Math.round((newY - sq) / sq)) % 2 == 1 && Math.round(((newX - sq) / sq)) % 2 == 0)
-                    ctx.fillStyle = "black";//"rgb(10,70,10)";
+                    ctx.fillStyle = "rgb(10,70,10)";
                 else
-                    ctx.fillStyle = "white"//"rgb(80,150,0)";
+                    ctx.fillStyle = "rgb(80,150,0)";
                 ctx.fillRect(newX - 17, newY - 17, 34, 34);
                 newY = 475;
                 newX = 275;
@@ -202,11 +203,11 @@ function move(ctx, player, player2, sq, n, pts) {
                 ctx.clearRect(newX - 17, newY - 17, 34, 34);
 
                 if ((Math.round((newY - sq) / sq)) % 2 == 0 && Math.round(((newX - sq) / sq)) % 2 == 1)
-                    ctx.fillStyle = "black";//"rgb(10,70,10)";
+                    ctx.fillStyle = "rgb(10,70,10)";
                 else if ((Math.round((newY - sq) / sq)) % 2 == 1 && Math.round(((newX - sq) / sq)) % 2 == 0)
-                    ctx.fillStyle = "black";//"rgb(10,70,10)";
+                    ctx.fillStyle = "rgb(10,70,10)";
                 else
-                    ctx.fillStyle = "white"//"rgb(80,150,0)";
+                    ctx.fillStyle = "rgb(80,150,0)";
                 ctx.fillRect(newX - 17, newY - 17, 34, 34);
                 newY = 275;
                 newX = 275;
@@ -222,11 +223,11 @@ function move(ctx, player, player2, sq, n, pts) {
                 ctx.clearRect(newX - 17, newY - 17, 34, 34);
 
                 if ((Math.round((newY - sq) / sq)) % 2 == 0 && Math.round(((newX - sq) / sq)) % 2 == 1)
-                    ctx.fillStyle = "black";//"rgb(10,70,10)";
+                    ctx.fillStyle = "rgb(10,70,10)";
                 else if ((Math.round((newY - sq) / sq)) % 2 == 1 && Math.round(((newX - sq) / sq)) % 2 == 0)
-                    ctx.fillStyle = "black";//"rgb(10,70,10)";
+                    ctx.fillStyle = "rgb(10,70,10)";
                 else
-                    ctx.fillStyle = "white"//"rgb(80,150,0)";
+                    ctx.fillStyle = "rgb(80,150,0)";
                 ctx.fillRect(newX - 17, newY - 17, 34, 34);
                 newY = 275;
                 newX = 475;
@@ -240,18 +241,17 @@ function move(ctx, player, player2, sq, n, pts) {
             //effect
             setTimeout(function () {
                 ctx.clearRect(newX - 17, newY - 17, 34, 34);
-
                 if ((Math.round((newY - sq) / sq)) % 2 == 0 && Math.round(((newX - sq) / sq)) % 2 == 1)
-                    ctx.fillStyle = "black";//"rgb(10,70,10)";
+                    ctx.fillStyle = "rgb(10,70,10)";
                 else if ((Math.round((newY - sq) / sq)) % 2 == 1 && Math.round(((newX - sq) / sq)) % 2 == 0)
-                    ctx.fillStyle = "black";//"rgb(10,70,10)";
+                    ctx.fillStyle = "rgb(10,70,10)";
                 else
-                    ctx.fillStyle = "white"//"rgb(80,150,0)";
+                    ctx.fillStyle = "rgb(80,150,0)";
                 ctx.fillRect(newX - 17, newY - 17, 34, 34);
                 newY = 175;
                 newX = 125;
             }, 200);
-            
+
         }
 
         //draw circle at newX,newY***********************************
@@ -266,15 +266,15 @@ function move(ctx, player, player2, sq, n, pts) {
             ctx.fill();
             ctx.closePath();
         }, 600);
-        
+
     } //snakes and ladder logic: ends
-    setTimeout(function(){
+    setTimeout(function () {
         player.x = newX;
         player.y = newY;
         //is Game Over?
         end(player, sq);
-    },300);//must be greater than the time out of newX newY update on sankes & ladder logic >200
-    
+    }, 300);//must be greater than the time out of newX newY update on sankes & ladder logic >200
+
     console.log("1=" + player.x, player.y, player.n);
 }
 window.addEventListener('load', () => {
@@ -286,13 +286,14 @@ window.addEventListener('load', () => {
     canvas.width = n * sq + 100;
     draw(ctx, sq, n);
     //snake(ctx);
-    const player2 = new player(ctx, sq + sq / 2 + 100, sq + (n * sq) - (sq / 2), 2, sq);
+    const player2 = new player(ctx, sq + sq / 2, sq + (n * sq) - (sq / 2), 2, sq);
     const player1 = new player(ctx, sq + sq / 2, sq + (n * sq) - (sq / 2), 1, sq);
 
     document.getElementById("start").addEventListener("click", () => {
         backgroundMusic();
-        start(ctx, player1);
+
         start(ctx, player2);
+        start(ctx, player1);
         //highlight player 1  &&  disble player2
         document.getElementById("p1").style.visibility = "visible";
         document.getElementById("button2").disabled = true;
