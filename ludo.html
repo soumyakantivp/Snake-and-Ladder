@@ -23,6 +23,7 @@
     <button id="start">START</button>
     <button id="p1" disabled></button>
     <button id="p2" disabled></button>
+    <button id="d" disabled></button>
     <div id="p1win">Player 1 WINS!</div>
     <div id="p2win">Player 2 WINS!</div>
 
@@ -179,7 +180,22 @@
         transform: translate(-50%, -50%);
         border: 2px solid black;
     }
-
+    #d {
+        z-index: 3;
+        background-color: transparent;
+        transition-duration: 0.3s;
+        visibility: hidden;
+        position: absolute;
+        left: 50%;
+        top: 45%;
+        transform: translate(-50%, 310px);
+        height: 80px;
+        width: 80px;
+        z-index: 1;
+        border: 7px solid red;
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
     #p1 {
         visibility: hidden;
         font-size: 18px;

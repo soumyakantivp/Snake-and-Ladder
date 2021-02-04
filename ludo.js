@@ -64,7 +64,7 @@ function backgroundMusic() {
     myMusic.play();
 }
 function start(ctx, player) {
-    blink();
+    //blink();
 
     console.log(player.x + " " + player.y);
 
@@ -101,9 +101,12 @@ function blink() {
     }, 200);
 
 }
+function focus(){
+
+}
 //let dir = 1;
 function move(ctx, player, player2, sq, n, pts) {
-
+    document.getElementById("d").style.borderColor = player.color;
     var initialX = player.x;
     var initialY = player.y;
     var newX, newY;
@@ -295,6 +298,7 @@ window.addEventListener('load', () => {
         start(ctx, player2);
         start(ctx, player1);
         //highlight player 1  &&  disble player2
+        document.getElementById("d").style.visibility = "visible";
         document.getElementById("p1").style.visibility = "visible";
         document.getElementById("button2").disabled = true;
         document.getElementById("start").style.visibility = "hidden";
