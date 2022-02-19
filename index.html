@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css2?family=Caesar+Dressing&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script src="ludo.js"></script>
+
+    <img id="l1" src="ladder1.png">
+    <img id="l2" src="ladder2.png">
+    <img id="s1" src="snake1.png">
+    <img id="s2" src="snake2.png">
+    <canvas id="canvas"></canvas>
+    <button id="dice"></button>
+    <button id="button">player1</button>
+    <button id="button2">player2</button>
+    <button id="start">START</button>
+    <button id="p1" disabled></button>
+    <button id="p2" disabled></button>
+    <button id="d" disabled></button>
+    <div id="p1win">Player 1 WINS!</div>
+    <div id="p2win">Player 2 WINS!</div>
+
+</body>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    div {
+        height: auto;
+        width: auto;
+        background-color: rgb(67, 126, 126);
+
+    }
+
+    #p1win {
+        visibility: hidden;
+        z-index: 2;
+        color: rgb(240, 30, 30);
+        text-shadow: 5px 5px rgba(0, 0, 0, 0.671);
+        position: absolute;
+        position: absolute;
+        left: 50%;
+        top: 45%;
+        transform: translate(-50%, -50%);
+        height: 50px;
+        width: 250px;
+        font-size: 40px;
+        font-family: 'Caesar Dressing', cursive;
+        background-color: transparent;
+        animation-name: p1win;
+        animation-duration: 8s;
+        animation-iteration-count: infinite;
+        animation-timing-function: linear;
+    }
+    #p2win {
+        visibility: hidden;
+        z-index: 2;
+        color: rgb(65, 240, 30);
+        text-shadow: 5px 5px rgba(0, 0, 0, 0.671);
+        position: absolute;
+        position: absolute;
+        left: 50%;
+        top: 45%;
+        transform: translate(-50%, -50%);
+        height: 50px;
+        width: 250px;
+        font-size: 40px;
+        font-family: 'Caesar Dressing', cursive;
+        background-color: transparent;
+        animation-name: p2win;
+        animation-duration: 8s;
+        animation-iteration-count: infinite;
+        animation-timing-function: linear;
+    }
+
+    #start {
+        z-index: 1;
+        position: absolute;
+        height: 45px;
+        width: 100px;
+        position: absolute;
+        left: 50%;
+        top: 45%;
+        transform: translate(-50%, 320px);
+        background-color: rgb(94, 30, 94);
+        border: none;
+        color: rgba(219, 228, 139, 0.938);
+        font-weight: bold;
+        font-size: 16px;
+        font-family: Arial, Helvetica, sans-serif;
+        letter-spacing: 3px;
+        animation-name: start;
+        animation-iteration-count: infinite;
+        animation-duration: 1.5s;
+        box-shadow: 0px 0px 18px 10px rgb(91, 43, 114);
+        border-radius: 50%;
+    }
+
+    #start:hover {
+        background-color: rgb(61, 21, 61);
+    }
+
+    #l1 {
+        position: absolute;
+        left: 50%;
+        top: 45%;
+        transform: translate(-225px, -150px);
+        z-index: 1;
+        height: 130px;
+        width: 100px;
+    }
+
+    #l2 {
+        position: absolute;
+        left: 50%;
+        top: 45%;
+        transform: translate(100px, -50px);
+        z-index: 1;
+        height: 200px;
+        width: 100px;
+    }
+
+    #s1 {
+        position: absolute;
+        left: 50%;
+        top: 45%;
+        transform: translate(-210px, 80px);
+        z-index: 1;
+        height: 150px;
+        width: 190px;
+        animation-iteration-count: infinite;
+        animation-name: snake1;
+        animation-duration: 2s;
+    }
+
+    #s2 {
+        position: absolute;
+        left: 50%;
+        top: 45%;
+        transform: translate(-80px, -210px);
+        z-index: 1;
+        height: 200px;
+        width: 150px;
+        animation-iteration-count: infinite;
+        animation-name: snake2;
+        animation-duration: 3s;
+    }
+
+    #dice {
+        box-shadow: 0px 0px 10px 4px black;
+        transition-duration: 0.3s;
+        visibility: hidden;
+        position: absolute;
+        left: 50%;
+        top: 45%;
+        transform: translate(-50%, 310px);
+        height: 80px;
+        width: 80px;
+        z-index: 1;
+        border: 5px solid black;
+        background-size: cover;
+        background-repeat: no-repeat;
+
+
+    }
+
+    #canvas {
+        position: absolute;
+        left: 50%;
+        top: 45%;
+        transform: translate(-50%, -50%);
+        border: 2px solid black;
+    }
+    #d {
+        z-index: 3;
+        background-color: transparent;
+        transition-duration: 0.3s;
+        visibility: hidden;
+        position: absolute;
+        left: 50%;
+        top: 45%;
+        transform: translate(-50%, 310px);
+        height: 80px;
+        width: 80px;
+        z-index: 1;
+        border: 7px solid red;
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+    #p1 {
+        visibility: hidden;
+        font-size: 18px;
+        font-weight: bold;
+        border: 5px solid red;
+        position: absolute;
+        height: 60px;
+        width: 120px;
+        left: 50%;
+        bottom: 30px;
+        transform: translate(190px, 10px);
+        background-color: transparent;
+        z-index: -1;
+
+    }
+
+    #p2 {
+        visibility: hidden;
+        font-size: 18px;
+        font-weight: bold;
+        border: 5px solid green;
+        position: absolute;
+        height: 60px;
+        width: 120px;
+        left: 50%;
+        bottom: 30px;
+        transform: translate(-310px, 10px);
+        background-color: transparent;
+        z-index: -1;
+
+    }
+
+    #button {
+        visibility: hidden;
+        font-size: 18px;
+        font-weight: bold;
+        border: none;
+        position: absolute;
+        height: 40px;
+        width: 100px;
+        left: 50%;
+        bottom: 30px;
+        transform: translate(200px, 0px);
+        background-color: red;
+        box-shadow: 0px -2px 10px 2px rgba(0, 0, 0, 0.5) inset;
+    }
+
+    #button2 {
+        visibility: hidden;
+        font-size: 18px;
+        font-weight: bold;
+        border: none;
+        position: absolute;
+        height: 40px;
+        width: 100px;
+        left: 50%;
+        bottom: 30px;
+        transform: translate(-300px, 0px);
+        background-color: green;
+        box-shadow: 0px -2px 10px 2px rgba(0, 0, 0, 0.5) inset;
+    }
+
+    #button:hover {
+        box-shadow: 0px -2px 10px 2px rgba(0, 0, 0, 1) inset;
+    }
+
+    #button2:hover {
+        box-shadow: 0px -2px 10px 2px rgba(0, 0, 0, 1) inset;
+    }
+
+    @keyframes snake1 {
+        25% {
+            transform: translate(-225px, 80px);
+            height: 150px;
+            width: 205px;
+        }
+
+        50% {
+            transform: translate(-210px, 80px);
+            height: 150px;
+            width: 190px;
+        }
+
+        75% {
+            transform: translate(-200px, 80px);
+            height: 150px;
+            width: 202px;
+        }
+
+        100% {
+            transform: translate(-210px, 80px);
+            height: 150px;
+            width: 190px;
+        }
+
+    }
+
+    @keyframes snake2 {
+        50% {
+            transform: translate(-80px, -210px);
+            height: 220px;
+            width: 150px;
+        }
+
+        100% {
+            transform: translate(-80px, -210px);
+            height: 200px;
+            width: 150px;
+        }
+
+    }
+
+    @keyframes start {
+        50% {
+            box-shadow: 0px 0px 20px 16px rgb(238, 49, 213);
+        }
+
+        100% {
+            box-shadow: 0px 0px 18px 10px rgb(71, 34, 95);
+        }
+    }
+    @keyframes p1win{
+        5% {color: rgb(240, 30, 30)}
+        10% {color: rgb(240, 234, 234)}
+        15% {color: rgb(240, 30, 30)}
+        20% {color: rgb(241, 241, 241)}
+        25% {color: rgb(240, 30, 30)}
+        30% {color: rgb(240, 234, 234)}
+        35% {color: rgb(240, 30, 30)}
+        40% {color: rgb(241, 241, 241)}
+        45% {color: rgb(240, 30, 30)}
+        50% {color: rgb(240, 234, 234)}
+        55% {color: rgb(240, 30, 30)}
+        60% {color: rgb(241, 241, 241)}
+        65% {color: rgb(240, 30, 30)}
+        70% {color: rgb(240, 234, 234)}
+        75% {color: rgb(240, 30, 30)}
+        80% {color: rgb(241, 241, 241)}
+        85% {color: rgb(240, 30, 30)}
+        90% {color: rgb(240, 234, 234)}
+        95% {color: rgb(240, 30, 30)}
+        100% {color: rgb(241, 241, 241)}
+    }
+    @keyframes p2win{
+        5% {color: rgb(65, 240, 30)}
+        10% {color: rgb(240, 234, 234)}
+        15% {color: rgb(65, 240, 30)}
+        20% {color: rgb(241, 241, 241)}
+        25% {color: rgb(65, 240, 30)}
+        30% {color: rgb(240, 234, 234)}
+        35% {color: rgb(65, 240, 30)}
+        40% {color: rgb(241, 241, 241)}
+        45% {color: rgb(65, 240, 30)}
+        50% {color: rgb(240, 234, 234)}
+        55% {color: rgb(65, 240, 30)}
+        60% {color: rgb(241, 241, 241)}
+        65% {color: rgb(65, 240, 30)}
+        70% {color: rgb(240, 234, 234)}
+        75% {color: rgb(65, 240, 30)}
+        80% {color: rgb(241, 241, 241)}
+        85% {color: rgb(65, 240, 30)}
+        90% {color: rgb(240, 234, 234)}
+        95% {color: rgb(65, 240, 30)}
+        100% {color: rgb(241, 241, 241)}
+    }
+</style>
+
+</html>
